@@ -1,13 +1,13 @@
 package com.crud.clientes.repository;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import com.crud.clientes.model.Cliente;
+import com.crud.clientes.model.exception.ResourceNotFoundException;
 
 @Repository
 public class ClienteRepository {
@@ -64,7 +64,7 @@ public class ClienteRepository {
 		Optional<Cliente> clienteCapturado = obterClientePorId(cliente.getId());
 		// Verifica se o cliente existe , caso não exista a exceção é lançada e o programa para
 		if(clienteCapturado.isEmpty()) {
-			throw new InputMismatchException("O Cliente não foi cadastrado no sistema.");
+			throw new ResourceNotFoundException("O Cliente não foi cadastrado no sistema.");
 		}
 		// antes de atualizar o cliente , ele é apagado da lista
 		deletarCliente(cliente.getId());
